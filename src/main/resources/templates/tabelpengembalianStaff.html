@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Boxicons -->
+	<link th:href='@{https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css}' rel='stylesheet'>
+	<!-- My CSS -->
+	<link rel="stylesheet" th:href="@{/css/style-tabelpeminjaman.css}">
+	<title>Pengembalian</title>
+	<link rel = "icon" th:href = "@{/images/logo1.svg}"  type = "image/x-icon">
+</head>
+<body>
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a th:href="@{/staff/}" class="brand">
+			<img th:src="@{/images/logo2.svg}" class='bx'>
+			<span class="text" style="color: #ff9f1c;">Staf</span>
+		</a>
+		<ul class="side-menu top">
+			<li>
+				<a th:href="@{/staff/}">
+					<i class='bx bx-stats'></i>
+					<span class="text">Analisis</span>
+				</a>
+			</li>
+			<li>
+				<a th:href="@{/staff/katalog}">
+					<i class='bx bx-category-alt'></i>
+					<span class="text">Katalog</span>
+				</a>
+			</li>
+			<li>
+				<a th:href="@{/staff/tabelpeminjaman}">
+					<i class='bx bx-edit'></i>
+					<span class="text">Peminjaman</span>
+				</a>
+			</li>
+			<li class="active">
+				<a th:href="@{/staff/tabelpengembalian}">
+					<i class='bx bx-redo'></i>
+					<span class="text">Pengembalian</span>
+				</a>
+			</li>
+			<li>
+				<a th:href="@{/staff/tabelkeuangan}">
+					<i class='bx bx-dollar-circle'></i>
+					<span class="text">Keuangan</span>
+				</a>
+			</li>
+		</ul>
+		<ul class="side-menu">
+			<li>
+				<a th:href="@{/logout}" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Logout</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+	<!-- SIDEBAR -->
+
+	<!-- CONTENT -->
+	<section id="content">
+		<!-- NAVBAR -->
+		<nav>
+			<i class='bx bx-menu' ></i>
+			<a th:href="@{#}" class="profile">
+				<i class='bx bx-user-circle'></i>
+			</a>
+		</nav>
+		<!-- NAVBAR -->
+
+		<!-- MAIN ANALISIS -->
+		<main>
+			<div class="head-title">
+				<div class="left">
+					<h1>Pengembalian</h1>
+					<ul class="breadcrumb">
+						<li>
+							<a th:href="@{#}"><span th:text="${user.name}"></span></a>
+						</li>
+						<li><i class='bx bx-chevron-right' ></i></li>
+						<li>
+							<a class="active" th:href="@{/staff/tabelpengembalian}">Pengembalian</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="table-data">
+				<div class="container">
+                    <div class="head">
+                        <h1>Daftar Buku Yang Harus Dikembalikan</h1>
+                    </div>
+					<table>
+                        <thead>
+                        <tr>
+                            <th>Tanggal Peminjaman</th>
+							<th>Nama Peminjam</th>
+							<th>Judul Buku</th>
+							<th>Nama Punulis</th>
+							<th>Denda</th>
+                            <th>Status Pengembalian</th>
+                        </tr>
+                    </thead>
+						<tbody>
+						<tr th:each="pengembalian : ${pengembalians}">
+							<td th:text="${pengembalian.peminjaman.createdAt}"></td>
+							<td th:text="${pengembalian.peminjaman.user.name}"></td>
+							<td th:text="${pengembalian.peminjaman.book.name}"></td>
+							<td th:text="${pengembalian.peminjaman.book.pengarang}"></td>
+							<td th:text="${pengembalian.getDenda()}"></td>
+							<td>
+								<button id="success-button" th:if="${pengembalian.statusPengembalian}" th:text="'Sudah Dikembalikan'"></button>
+								<form th:if="${!pengembalian.statusPengembalian}" th:action="@{/staff/tabelpengembalian}" method="POST">
+									<input type="hidden" name="pengembalian_id" th:value="${pengembalian.id}">
+									<input type="date" name="tanggal_pengembalian" required>
+									<button type="submit" id="setuju-button">Setujui</button>
+								</form>
+
+							</td>
+						</tr>
+						</tbody>
+                    </table>
+				  </div>
+			</div>
+		</main>
+		<!-- MAIN -->
+	</section>
+	<!-- CONTENT -->
+	
+
+	<script th:src="@{/js/script.js}"></script>
+</body>
+</html>

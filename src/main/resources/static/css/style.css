@@ -1,0 +1,323 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins';
+    padding: 40px;
+    background-color: #ffbf69;
+    /* Full height */
+    height: 100% auto; 
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.container{
+    min-height: calc(100vh - 40px * 2);
+    display: grid;
+    grid-template-columns: 50% 50%;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.login-left{
+    display: flex;
+    flex-direction: column;
+    justify-content: content;
+    padding-left: 110px;
+    background-color: white;
+}
+
+.alert.alert-danger {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+    padding: 1rem;
+}
+
+.alert.alert-success {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+    padding: 1rem;
+}
+
+.login-right{
+    background-color: #eeee;
+    display: flex;
+    justify-content: center;
+}
+
+.login-right img 
+{
+    width: 80%;
+    transition: transform 0.3s ease-in-out; /* adds a smooth transition effect to the transform property */
+}
+
+.login-right img:hover 
+{
+    transform: scale(1.1); /* zooms in the image by 10% when hovered over */
+}
+
+.login-header {
+    margin-bottom: 30px;
+    margin-top: 60px;
+}
+
+.login-header span{
+    color: #ff9f1c;
+}
+
+.login-header h1 {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.login-header p {
+    margin-top: -10px;
+    opacity: .7;
+}
+
+.login-form{
+    width: 450px;
+}
+
+.login-form-content{
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
+
+.login-form-footer{
+    display: flex;
+    gap: 5px;
+    margin-left: 10px;
+    margin-top: 20px;
+    font-size: 14px;
+    justify-content: center;
+}
+
+h1 a {
+    text-decoration: none;
+    color: #ffbf69;
+}
+
+h1 a:hover{
+    color: #ff9f1c;
+    cursor: pointer;
+}
+
+.login-form-footer a {
+    font-weight: bolder;
+    opacity: 1;
+    color: #ffbf69;
+    text-decoration: none;
+}
+
+.login-form-footer a:hover{
+    color: #ff9f1c;
+    cursor: pointer;
+}
+
+.form-item label:not(.checkboxLabel){
+    display: inline-block;
+    background-color: white;
+    margin-bottom: 10px;
+    position: absolute;
+    padding: 0 10px;
+    transform: translate(30px, -10px);
+    font-size: 14px;
+}
+
+input[type='text'],
+input[type='email'],
+input[type='password']{
+    border: 1px solid black;
+    height: 55px;
+    padding: 0 2rem;
+    width: 100%;
+    transition: background .5s;
+    font-size: 18px;
+    border-radius: 100px;
+}
+
+.checkbox {
+    display: flex;
+    margin-top: -20px;
+    align-items: center;
+    gap: 7px
+}
+
+input[type='checkbox'] {
+    width: 20px;
+    height: 20px;
+    accent-color: #ff9f1c;
+}
+
+button {
+    border: none;
+    background-color: #ffbf69;
+    color: white;
+    padding: 1rem;
+    border-radius: 100px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 18px;
+    height: 55px;
+    cursor: pointer;
+}
+
+button:hover 
+{
+  background-color: #ff9f1c;
+  cursor: pointer;
+}
+
+.signup-left{
+    display: flex;
+    flex-direction: column;
+    justify-content: content;
+    padding-left: 110px;
+    padding-bottom: 10px;
+    background-color: white;
+}
+
+.signup-right{
+    background-color: #eeee;
+    display: flex;
+    justify-content: center;
+}
+
+.signup-right img 
+{
+    width: 80%;
+    transition: transform 0.3s ease-in-out; /* adds a smooth transition effect to the transform property */
+}
+
+.signup-right img:hover 
+{
+    transform: scale(1.1); /* zooms in the image by 10% when hovered over */
+}
+
+.signup-header {
+    margin-bottom: 30px;
+    margin-top: 20px;
+}
+
+.signup-header span{
+    color:#ff9f1c;
+}
+
+.signup-header h1 {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.signup-header p {
+    margin-top: -10px;
+    opacity: .7;
+}
+
+.signup-form{
+    width: 450px;
+}
+
+.signup-form-content{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.signup-form-footer{
+    display: flex;
+    gap: 5px;
+    margin-left: 10px;
+    margin-top: 20px;
+    font-size: 14px;
+    justify-content: center;
+}
+
+.signup-form-footer a {
+    font-weight: bolder;
+    opacity: 1;
+    color: #ffbf69;
+    text-decoration: none;
+}
+
+.signup-form-footer a:hover{
+    color: #ff9f1c;
+    cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 1350px){
+    .login-left {
+        padding: 50px !important;
+    }
+
+    .login-form {
+        width: 100%;
+    }
+
+    .login-form-footer{
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .login-header {
+        margin-top: -35px;
+    }
+
+    .signup-left {
+        padding: 50px !important;
+    }
+
+    .signup-form {
+        width: 100%;
+    }
+
+    .signup-form-footer{
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .signup-header {
+        margin-top: -35px;
+    }
+}
+
+@media (max-width: 768px){
+    body {
+        padding: 20px;
+    }
+
+    .container {
+        grid-template-columns: auto;
+    }
+
+    .login-right {
+        display: none;
+    }
+
+    .login-header {
+        margin-top: -35px;
+    }
+
+    .signup-right {
+        display: none;
+    }
+
+    .signup-header {
+        margin-top: -35px;
+    }
+}
+
+
+

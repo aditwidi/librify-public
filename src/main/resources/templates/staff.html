@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Boxicons -->
+	<link th:href='@{https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css}' rel='stylesheet'>
+	<!-- My CSS -->
+	<link rel="stylesheet" th:href="@{/css/style-staff.css}">
+
+	<title>Staf Librify</title>
+	<link rel = "icon" th:href = "@{/images/logo1.svg}"  type = "image/x-icon">
+</head>
+<body>
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a th:href="@{/staff/}" class="brand">
+			<img th:src="@{/images/logo2.svg}" class='bx'>
+			<span class="text" style="color: #ff9f1c;">Staf</span>
+		</a>
+		<ul class="side-menu top">
+			<li class="active">
+				<a th:href="@{/staff/}">
+					<i class='bx bx-stats'></i>
+					<span class="text">Analisis</span>
+				</a>
+			</li>
+			<li>
+				<a th:href="@{/staff/katalog}">
+					<i class='bx bx-category-alt'></i>
+					<span class="text">Katalog</span>
+				</a>
+			</li>
+			<li>
+				<a th:href="@{/staff/tabelpeminjaman}">
+					<i class='bx bx-edit'></i>
+					<span class="text">Peminjaman</span>
+				</a>
+			</li>
+			<li>
+				<a th:href="@{/staff/tabelpengembalian}">
+					<i class='bx bx-redo'></i>
+					<span class="text">Pengembalian</span>
+				</a>
+			</li>
+			<li>
+				<a th:href="@{/staff/tabelkeuangan}">
+					<i class='bx bx-dollar-circle'></i>
+					<span class="text">Keuangan</span>
+				</a>
+			</li>
+		</ul>
+		<ul class="side-menu">
+			<li>
+				<a th:href="@{/logout}" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Logout</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+	<!-- SIDEBAR -->
+
+	<!-- CONTENT -->
+	<section id="content">
+		<!-- NAVBAR -->
+		<nav>
+			<i class='bx bx-menu' ></i>
+			<a th:href="@{#}" class="profile">
+				<i class='bx bx-user-circle'></i>
+			</a>
+		</nav>
+		<!-- NAVBAR -->
+
+		<!-- MAIN ANALISIS -->
+		<main>
+			<div class="head-title">
+				<div class="left">
+					<h1>Analisis</h1>
+					<ul class="breadcrumb">
+						<li>
+							<a th:href="@{#}"><span th:text="${user.name}"></span></a>
+						</li>
+						<li><i class='bx bx-chevron-right' ></i></li>
+						<li>
+							<a class="active" th:href="@{#}">Analisis</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<ul class="box-info">
+				<li>
+					<i class='bx bxs-star-half'></i>
+					<span class="text">
+						<h3><span th:text="${avgRating}"></span></h3>
+						<p>Rating</p>
+					</span>
+				</li>
+				<li>
+					<i class='bx bxs-group' ></i>
+					<span class="text">
+						<h3><span th:text="${jmlAnggota}"></span></h3>
+						<p>Anggota</p>
+					</span>
+				</li>
+				<li>
+					<i class='bx bxs-dollar-circle' ></i>
+					<div>
+						<p style="text-align: center;">Keuangan "bulan ini"</p>
+						<div class="naik">
+							<i class='bx bxs-chevrons-up'></i>
+							<h3 th:text="'Rp.' + (${pendapatanBulanan[5]})"></h3>
+						</div>
+						<div class="turun">
+							<i class='bx bxs-chevrons-down'></i>
+							<h3 th:text="'Rp.' + (${pengeluaranBulanan[5]})"></h3>
+						</div>
+					</div>
+					
+					</span>
+				</li>
+			</ul>
+
+			<div class="table-data">
+				<div class="order">
+					<h3 style="text-align: center;">Statistik Keuangan</h3>
+					<canvas id="myChart"></canvas>
+				</div>
+				<div class="todo">
+						<h3 style="text-align: center;">Ringkasan Buku</h3><br>
+					<ul class="todo-list">
+						<li class="completed">
+							<p><span th:text="${jmlBuku}"></span> Koleksi Buku</p>
+						</li>
+						<li class="completed">
+							<p><span th:text="${jmlPeminjaman}"></span> Buku Dipinjam</p>
+						</li>
+						<li class="not-completed">
+							<p>476 Jurnal</p>
+						</li>
+						<li class="completed">
+							<p>546 Novel</p>
+						</li>
+						<li class="not-completed">
+							<p>234 Komik</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</main>
+		<!-- MAIN -->
+	</section>
+	<!-- CONTENT -->
+	
+
+	<script th:src="@{/js/script-staff.js}"></script>
+	<script th:src="@{https://cdn.jsdelivr.net/npm/chart.js}"></script>
+</body>
+<script>
+	var dataKeuangan = {
+		pendapatan: [[${pendapatanBulanan}]],
+		pengeluaran: [[${pengeluaranBulanan}]]
+	};
+
+	var ctx = document.getElementById('myChart').getContext('2d');
+	var myChart = new Chart(ctx, {
+		type: 'bar',
+		data: {
+			labels: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
+			datasets: [{
+				label: 'Pendapatan',
+				data: dataKeuangan.pendapatan,
+				backgroundColor: 'rgba(255, 99, 132, 0.2)',
+				borderColor: 'rgba(255, 99, 132, 1)',
+				borderWidth: 1
+			}, {
+				label: 'Pengeluaran',
+				data: dataKeuangan.pengeluaran,
+				backgroundColor: 'rgba(54, 162, 235, 0.2)',
+				borderColor: 'rgba(54, 162, 235, 1)',
+				borderWidth: 1
+			}]
+		},
+		options: {
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero: true
+					}
+				}]
+			}
+		}
+	});
+</script>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Boxicons -->
+	<link th:href='@{https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css}' rel='stylesheet'>
+	<!-- My CSS -->
+	<!-- <link rel="stylesheet" th:href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
+	<link rel="stylesheet" th:href="@{/css/style-tablekeuangan.css}">
+	<title>Keuangan Librify</title>
+	<link rel = "icon" th:href = "@{/images/logo1.svg}"  type = "image/x-icon">
+	<style>
+		table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+            
+        }
+        
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+	</style>
+	
+	<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>	   -->
+	
+</head>
+<body>
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a th:href="@{/staff/}" class="brand">
+			<img th:src="@{/images/logo2.svg}" class='bx'>
+			<span class="text" style="color: #ff9f1c;">Staf</span>
+		</a>
+		<ul class="side-menu top">
+			<li>
+				<a th:href="@{/staff/}">
+					<i class='bx bx-stats'></i>
+					<span class="text">Analisis</span>
+				</a>
+			</li>
+			<li>
+				<a th:href="@{/staff/katalog}">
+					<i class='bx bx-category-alt'></i>
+					<span class="text">Katalog</span>
+				</a>
+			</li>
+			<li>
+				<a th:href="@{/staff/tabelpeminjaman}">
+					<i class='bx bx-edit'></i>
+					<span class="text">Peminjaman</span>
+				</a>
+			</li>
+			<li>
+				<a th:href="@{/staff/tabelpengembalian}">
+					<i class='bx bx-redo'></i>
+					<span class="text">Pengembalian</span>
+				</a>
+			</li>
+			<li class="active">
+				<a th:href="@{/staff/tabelkeuangan}">
+					<i class='bx bx-dollar-circle'></i>
+					<span class="text">Keuangan</span>
+				</a>
+			</li>
+		</ul>
+		<ul class="side-menu">
+			<li>
+				<a th:href="@{/logout}" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Logout</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+	<!-- SIDEBAR -->
+
+	<!-- CONTENT -->
+	<section id="content">
+		<!-- NAVBAR -->
+		<nav>
+			<i class='bx bx-menu' ></i>
+			<a th:href="@{#}" class="profile">
+				<i class='bx bx-user-circle'></i>
+			</a>
+		</nav>
+		<!-- NAVBAR -->
+
+		<!-- MAIN ANALISIS -->
+		<main>
+			<div class="wrapper"> 
+				<div class="head-title">
+					<div class="left">
+						<h1>Keuangan</h1>
+						<ul class="breadcrumb">
+							<li>
+								<a th:href="@{#}"><span th:text="${user.name}"></span></a>
+							</li>
+							<li><i class='bx bx-chevron-right' ></i></li>
+							<li>
+								<a class="active" th:href="@{/staff/tabelkeuangan}">Keuangan</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<br>
+				<div class="table-data">
+					<div class="todo">
+						<h3 style="text-align: center;">Keuangan</h3><br>
+					<table style="width:100%">
+						<thead>
+						<tr>
+							<th>Tanggal</th>
+							<th>Jenis</th>
+							<th>Jumlah</th>
+							<th>Keterangan</th>
+							<th>Total</th>
+						</tr>
+						</thead>
+						<tbody id="dataBody">
+						<tr th:each="keuangan : ${keuangans}">
+							<td th:text="${keuangan.createdAt}"></td>
+							<td>
+								<span th:if="${keuangan.jenis} == 1">Pemasukan</span>
+								<span th:if="${keuangan.jenis} == -1">Pengeluaran</span>
+							</td>
+							<td th:text="${keuangan.nominalArus}"></td>
+							<td th:text="${keuangan.deskripsi}"></td>
+						</tr>
+						</tbody>
+						<tfoot>
+						  <tr>
+							<th colspan="4">Total</th>
+							  <th id="total" th:text="${totalKeuangan}"></th>
+						  </tr>
+						</tfoot>
+					  </table>
+						<div class="submit-button">
+							<a id="add-button" th:href="@{/staff/tabelkeuangan/keuangan}">
+								Input Keuangan
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+		<!-- MAIN -->
+	</section>
+	  
+	<script th:src="@{/js/script.js}"></script>
+</body>
+</html>
